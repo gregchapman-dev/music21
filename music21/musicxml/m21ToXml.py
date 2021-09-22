@@ -2261,12 +2261,14 @@ class ScoreExporter(XMLExporterBase, PartStaffExporterMixin):
         >>> md = metadata.Metadata()
         >>> md.date = metadata.primitives.DateRelative('1689', 'onOrBefore')
         >>> md.localeOfComposition = 'Rome'
+        >>> md.editorial['excerpt-start-measure'] = '24'
 
         >>> mxMisc = SX.metadataToMiscellaneous(md)
         >>> SX.dump(mxMisc)
         <miscellaneous>
           <miscellaneous-field name="date">1689/--/-- or earlier</miscellaneous-field>
           <miscellaneous-field name="localeOfComposition">Rome</miscellaneous-field>
+          <miscellaneous-field name="excerpt-start-measure">24</miscellaneous-field>
         </miscellaneous>
         '''
         if md is None and self.scoreMetadata is None:
@@ -2280,6 +2282,13 @@ class ScoreExporter(XMLExporterBase, PartStaffExporterMixin):
         for name, value in md.all(skipContributors=True):
             if name in ('movementName', 'movementNumber', 'title', 'copyright'):
                 continue
+            mxMiscField = SubElement(mxMiscellaneous, 'miscellaneous-field')
+            mxMiscField.set('name', name)
+            mxMiscField.text = value
+            foundOne = True
+
+        # Add any miscellaneous metadata found in md.editorial
+        for name, value in md.editorial.items():
             mxMiscField = SubElement(mxMiscellaneous, 'miscellaneous-field')
             mxMiscField.set('name', name)
             mxMiscField.text = value

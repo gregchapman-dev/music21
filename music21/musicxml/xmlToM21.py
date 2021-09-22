@@ -1319,9 +1319,12 @@ class MusicXMLImporter(XMLParserBase):
                     continue  # it is required, so technically can raise an exception
                 miscFieldValue = mxMiscField.text
                 if miscFieldValue is None:
-                    continue  # it is required, so technically can raise an exception
+                    miscFieldValue = ''
                 try:
-                    setattr(md, miscFieldName, miscFieldValue)
+                    if hasattr(md, miscFieldName):
+                        setattr(md, miscFieldName, miscFieldValue)
+                    else:
+                        md.editorial[miscFieldName] = miscFieldValue
                 except Exception as e:  # pylint: disable=broad-except
                     environLocal.warn('Could not set metadata: {} to {}: {}'.format(
                         miscFieldName, miscFieldValue, e
