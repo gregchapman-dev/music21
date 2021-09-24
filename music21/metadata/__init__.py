@@ -188,6 +188,8 @@ class Metadata(base.Music21Object):
     workIdLookupDict = {}
     for key, value in workIdAbbreviationDict.items():
         workIdLookupDict[value.lower()] = key
+    del key
+    del value
 
     # INITIALIZER #
 
