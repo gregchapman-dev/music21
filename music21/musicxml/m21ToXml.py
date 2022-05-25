@@ -2311,11 +2311,6 @@ class ScoreExporter(XMLExporterBase, PartStaffExporterMixin):
             #         copyrights = [c]
             # else:
             copyrights = self.scoreMetadata.get('copyright')
-            if copyrights is None:
-                copyrights = []
-            if not isinstance(copyrights, list):
-                copyrights = [copyrights]
-
             for c in copyrights:
                 mxRights = SubElement(mxId, 'rights')
                 if c.role is not None:
@@ -2358,7 +2353,7 @@ class ScoreExporter(XMLExporterBase, PartStaffExporterMixin):
         mxMiscellaneous = Element('miscellaneous')
 
         foundOne = False
-        allItems: t.Dict[t.Any] = []
+        allItems: t.List[t.Tuple[str, t.Any]] = []
 
         # if self.USE_BACKWARD_COMPATIBLE_METADATA_APIS:
         #     allItems = md.all(skipContributors=True)
@@ -2514,7 +2509,7 @@ class ScoreExporter(XMLExporterBase, PartStaffExporterMixin):
         #         mxWorkTitle = SubElement(mxWork, 'work-title')
         #         mxWorkTitle.text = str(mdObj.title)
         # else:
-        titleText: metadata.Text = mdObj.get('title')
+        titleText: metadata.Text = mdObj.getFirst('title')
         if titleText is not None:
             if firstTitleFound is None:
                 firstTitleFound = titleText
@@ -2528,7 +2523,7 @@ class ScoreExporter(XMLExporterBase, PartStaffExporterMixin):
         #         mxMovementNumber = SubElement(mxScoreHeader, 'movement-number')
         #         mxMovementNumber.text = str(mdObj.movementNumber)
         # else:
-        movementNumberText: metadata.Text = mdObj.get('movementNumber')
+        movementNumberText: metadata.Text = mdObj.getFirst('movementNumber')
         if movementNumberText is not None:
             mxMovementNumber = SubElement(mxScoreHeader, 'movement-number')
             mxMovementNumber.text = str(movementNumberText)
@@ -2548,7 +2543,7 @@ class ScoreExporter(XMLExporterBase, PartStaffExporterMixin):
         #        else:
         #            return
         # else:
-        movementNameText: metadata.Text = mdObj.get('movementName')
+        movementNameText: metadata.Text = mdObj.getFirst('movementName')
         if movementNameText:
             mxMovementTitle.text = str(movementNameText)
         else:
