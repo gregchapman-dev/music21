@@ -520,7 +520,7 @@ class Test(unittest.TestCase):
         actual = base.metaSetDate(work, meta)
 
         self.assertIs(meta, actual)
-        self.assertEqual(expDate, actual.date)
+        self.assertEqual(expDate, actual.dateCreated)
 
     def testMetaDate2(self):
         '''
@@ -540,7 +540,7 @@ class Test(unittest.TestCase):
         actual = base.metaSetDate(work, meta)
 
         self.assertIs(meta, actual)
-        self.assertEqual(expDate, actual.date)
+        self.assertEqual(expDate, actual.dateCreated)
 
     def testMetaDate3(self):
         '''
@@ -560,7 +560,7 @@ class Test(unittest.TestCase):
         actual = base.metaSetDate(work, meta)
 
         self.assertIs(meta, actual)
-        self.assertEqual(expDate, actual.date)
+        self.assertEqual(expDate, actual.dateCreated)
 
     @mock.patch('music21.mei.base.environLocal')
     def testMetaDate4(self, mockEnviron):
@@ -582,7 +582,7 @@ class Test(unittest.TestCase):
         actual = base.metaSetDate(work, meta)
 
         self.assertIs(meta, actual)
-        self.assertEqual(expDate, actual.date)
+        self.assertEqual(expDate, actual.dateCreated)
         mockEnviron.warn.assert_called_once_with(expWarn)
 
     def testMetaDate5(self):
@@ -603,7 +603,7 @@ class Test(unittest.TestCase):
         actual = base.metaSetDate(work, meta)
 
         self.assertIs(meta, actual)
-        self.assertEqual(expDate, actual.date)
+        self.assertEqual(expDate, actual.dateCreated)
 
     def testMetaDate6(self):
         '''
@@ -623,7 +623,7 @@ class Test(unittest.TestCase):
         actual = base.metaSetDate(work, meta)
 
         self.assertIs(meta, actual)
-        self.assertEqual(expDate, actual.date)
+        self.assertEqual(expDate, actual.dateCreated)
 
     # -----------------------------------------------------------------------------
     # class TestAttrTranslators(unittest.TestCase):
