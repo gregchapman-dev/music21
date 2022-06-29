@@ -1085,7 +1085,10 @@ class MetadataBundle(prebase.ProtoM21Object):
         ...
         '''
         from music21 import metadata
-        return tuple(sorted(metadata.RichMetadata.searchAttributes))
+        return tuple(sorted(
+            metadata.properties.ALL_UNIQUE_NAMES
+            + list(metadata.RichMetadata.additionalRichMetadataAttributes)
+        ))
 
     def read(self, filePath=None):
         r'''

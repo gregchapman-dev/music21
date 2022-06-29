@@ -298,6 +298,17 @@ class Test(unittest.TestCase):
                     getattr(md, uniqueName),
                     f'The {uniqueName}'
                 )
+        elif valueType is int:
+            md[namespaceName] = [17]
+            self.assertEqual(
+                getattr(md, uniqueName),
+                '17'
+            )
+            md[uniqueName] = (1,)
+            self.assertEqual(
+                getattr(md, uniqueName),
+                '1'
+            )
         else:
             self.fail('internal test error: invalid valueType')
 
@@ -406,6 +417,10 @@ class Test(unittest.TestCase):
                     metadata.Text(f'The 3rd {uniqueName}')
                 )
             )
+        elif valueType is int:
+            md.add(namespaceName, [2, 3])
+            self.assertEqual(getattr(md, uniqueName), '1, 2, 3')
+            self.assertEqual(md[uniqueName], (1, 2, 3))
 
         # We've tested md[uniqueName], check to make sure that md[namespaceName]
         # returns exactly the same thing.
@@ -610,6 +625,21 @@ class Test(unittest.TestCase):
             'electronicReleaseDate',
             'humdrum:YER',
             valueType=metadata.DateSingle
+        )
+        self.checkUniqueNamedItem(
+            'fileFormat',
+            'm21FileInfo',
+            valueType=metadata.Text
+        )
+        self.checkUniqueNamedItem(
+            'filePath',
+            'm21FileInfo',
+            valueType=metadata.Text
+        )
+        self.checkUniqueNamedItem(
+            'fileNumber',
+            'm21FileInfo',
+            valueType=int
         )
 
 # -----------------------------------------------------------------------------

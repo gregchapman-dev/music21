@@ -1107,6 +1107,29 @@ STANDARD_PROPERTY_DESCRIPTIONS: t.Tuple[PropertyDescription, ...] = (
         namespace='humdrum',
         valueType=DateSingle,
         isContributor=False),
+
+    # The following properties are in the music21 namespace, and are specific to
+    # the file that was parsed to produce this metadata.
+
+    # fileFormat: The format of the file that was parsed to produce this metadata
+    PropertyDescription(
+        name='fileFormat',
+        namespace='m21FileInfo',
+        isContributor=False),
+
+    # filePath: The path to the file that was parsed to produce this metadata
+    PropertyDescription(
+        name='filePath',
+        namespace='m21FileInfo',
+        isContributor=False),
+
+    # fileNumber: The number of the file (within a group of files) that was parsed
+    #   to produce this metadata.
+    PropertyDescription(
+        name='fileNumber',
+        namespace='m21FileInfo',
+        valueType=int,
+        isContributor=False),
 )
 
 # -----------------------------------------------------------------------------
@@ -1171,6 +1194,15 @@ MUSIC21_WORK_ID_TO_UNIQUE_NAME: t.Dict[str, str] = {
     else '':
         x.uniqueName if x.uniqueName
         else x.name
+        for x in STANDARD_PROPERTY_DESCRIPTIONS
+        if x.oldMusic21WorkId
+}
+
+UNIQUE_NAME_TO_MUSIC21_WORK_ID: t.Dict[str, str] = {
+    x.uniqueName if x.uniqueName
+    else x.name:
+        x.oldMusic21WorkId if x.oldMusic21WorkId
+        else ''
         for x in STANDARD_PROPERTY_DESCRIPTIONS
         if x.oldMusic21WorkId
 }
