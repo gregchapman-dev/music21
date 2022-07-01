@@ -742,12 +742,10 @@ class Metadata(base.Music21Object):
             if skipContributors and self._isContributorNamespaceName(name):
                 continue
 
-            uniqueName: t.Optional[str] = properties.NAMESPACE_NAME_TO_UNIQUE_NAME.get(
-                name, None
-            )
+            uniqueName: t.Optional[str] = self.namespaceNameToUniqueName(name)
 
             if uniqueName is None:
-                # it's a custom metadata item, use the name verbatim
+                # it's a custom metadata item, use the original name verbatim
                 uniqueName = name
 
             value: ValueType
