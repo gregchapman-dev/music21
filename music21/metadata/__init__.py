@@ -1562,22 +1562,37 @@ class Metadata(base.Music21Object):
     @property
     def title(self):
         r'''
-        Get the title of the work, or the next-matched title string
-        available from a related parameter fields.
+        Get the title of the work.
 
         >>> md = metadata.Metadata(title='Third Symphony')
         >>> md.title
         'Third Symphony'
 
         >>> md = metadata.Metadata(popularTitle='Eroica')
-        >>> md.title
+        >>> md.title is None
+        True
+        '''
+        return self._getSingularAttribute('title')
+
+    @property
+    def bestTitle(self):
+        r'''
+        Get the title of the work, or the next-matched title string
+        available from a related parameter fields.
+
+        >>> md = metadata.Metadata(title='Third Symphony')
+        >>> md.bestTitle
+        'Third Symphony'
+
+        >>> md = metadata.Metadata(popularTitle='Eroica')
+        >>> md.bestTitle
         'Eroica'
 
         >>> md = metadata.Metadata(
         ...     title='Third Symphony',
         ...     popularTitle='Eroica',
         ...     )
-        >>> md.title
+        >>> md.bestTitle
         'Third Symphony'
 
         >>> md.popularTitle

@@ -216,8 +216,8 @@ class RnWriter(prebase.ProtoM21Object):
 
         workingTitle = []
 
-        if md.title:
-            workingTitle.append(md.title)
+        if md.bestTitle:
+            workingTitle.append(md.bestTitle)
         if md.movementNumber:
             workingTitle.append(f'- No.{md.movementNumber}:')  # Spaces later
         if md.movementName:
