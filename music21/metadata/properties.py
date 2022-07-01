@@ -398,6 +398,15 @@ STANDARD_PROPERTY_DESCRIPTIONS: t.Tuple[PropertyDescription, ...] = (
         valueType=Contributor,
         isContributor=True),
 
+    # analyst: a person or organization that reviews, examines and interprets data or
+    #   information in a specific area (e.g. harmony analysis of a score)
+    PropertyDescription(
+        uniqueName='analyst',
+        name='ANL',
+        namespace='marcrel',
+        valueType=Contributor,
+        isContributor=True),
+
     # annotator: a person who writes manuscript annotations on a printed item.
     PropertyDescription(
         uniqueName='annotator',
@@ -652,6 +661,14 @@ STANDARD_PROPERTY_DESCRIPTIONS: t.Tuple[PropertyDescription, ...] = (
     PropertyDescription(
         uniqueName='musician',
         name='MUS',
+        namespace='marcrel',
+        valueType=Contributor,
+        isContributor=True),
+
+    # proofreader: A person who corrects printed matter.
+    PropertyDescription(
+        uniqueName='proofreader',
+        name='PFR',
         namespace='marcrel',
         valueType=Contributor,
         isContributor=True),
