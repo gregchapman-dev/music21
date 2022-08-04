@@ -171,9 +171,6 @@ environLocal = environment.Environment(os.path.basename(__file__))
 AmbitusShort = namedtuple('AmbitusShort',
                           ['semitones', 'diatonic', 'pitchLowest', 'pitchHighest'])
 
-ValueType = t.Union[DateSingle, DateRelative, DateBetween, DateSelection,
-                    Text, Contributor, Copyright, int, t.List[int], AmbitusShort]
-
 # -----------------------------------------------------------------------------
 
 
