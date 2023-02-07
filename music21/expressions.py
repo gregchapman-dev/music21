@@ -1060,6 +1060,37 @@ class Turn(Ornament):
         # is an OffsetQL, it will always be > 0.
         return self.delay != OrnamentDelay.NO_DELAY
 
+    @property
+    def name(self) -> str:
+        '''
+        returns the name of the Turn/InvertedTurn, which is generally the class
+        name lowercased, with spaces where a new capital occurs, but also with
+        a 'delayed' prefix, if the Turn/InvertedTurn is delayed.  If the delay
+        is of a specific duration, the prefix will include that duration.
+
+        Subclasses can override this as necessary.
+
+        >>> nonDelayedTurn = expressions.Turn()
+        >>> nonDelayedTurn.name
+        'turn'
+
+        >>> from music21.common.enums import OrnamentDelay
+        >>> delayedInvertedTurn = expressions.InvertedTurn(delay=OrnamentDelay.DEFAULT_DELAY)
+        >>> delayedInvertedTurn.name
+        'delayed inverted turn'
+
+        >>> delayedBy1Turn = expressions.Turn(delay=1.0)
+        >>> delayedBy1Turn.name
+        'delayed(delayQL=1.0) turn'
+
+        '''
+        superName: str = super().name
+        if self.delay == OrnamentDelay.DEFAULT_DELAY:
+            return 'delayed ' + superName
+        elif isinstance(self.delay, (float, Fraction)):
+            return f'delayed(delayQL={self.delay}) ' + superName
+        return superName
+
     def realize(self, srcObj: 'music21.note.Note', *, inPlace=False):
         # noinspection PyShadowingNames
         '''
