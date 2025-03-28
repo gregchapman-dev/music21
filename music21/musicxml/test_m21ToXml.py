@@ -725,7 +725,8 @@ class Test(unittest.TestCase):
 
         expectedResults2 = (
             {
-                'type': 'start',
+                'type': 'sostenuto',
+                'abbreviated': 'yes',
                 'sign': 'yes',
                 'number': '1',
             },

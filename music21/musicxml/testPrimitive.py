@@ -1507,7 +1507,7 @@ pedalSymLines = '''<?xml version="1.0" encoding="UTF-8"?>
       </attributes>
       <direction>
          <direction-type>
-            <pedal line="no" sign="yes" type="start" default-y="-79" relative-x="-12"/>
+            <pedal line="no" sign="yes" abbreviated="yes" type="sostenuto" default-y="-79" relative-x="-12"/>
          </direction-type>
       </direction>
       <direction>
